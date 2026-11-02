@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+*.pyc
+spam_history.db
+data/SMSSpamCollection
+models/*.joblib
+models/metrics.txt
