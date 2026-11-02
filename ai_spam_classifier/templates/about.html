@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}About the model · SpamShield{% endblock %}
+{% block content %}
+<section class="hero"><span class="eyebrow">HOW IT WORKS</span><h1>Inside the model</h1><p>Text is normalized, converted into TF-IDF features and classified by a trained model.</p></section>
+<section class="grid">
+  <article class="mini"><h3>1 · Preprocessing</h3><p>Lowercase conversion, URL and number normalization, and punctuation cleanup.</p></article>
+  <article class="mini"><h3>2 · TF-IDF</h3><p>Words and two-word phrases are converted into weighted numerical features.</p></article>
+  <article class="mini"><h3>3 · Classification</h3><p>Naive Bayes and Logistic Regression are compared; the higher spam F1-score model is saved.</p></article>
+</section>
+<section class="panel"><h2>Training evaluation</h2><pre>{{ metrics }}</pre></section>
+<p class="notice">Metrics are calculated from a held-out split of the public dataset. They do not guarantee performance on every new message or language.</p>
+{% endblock %}

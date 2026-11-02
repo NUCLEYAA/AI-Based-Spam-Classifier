@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}History · SpamShield{% endblock %}
+{% block content %}
+<section class="hero"><span class="eyebrow">YOUR RECENT CHECKS</span><h1>Message history</h1><p>Predictions saved locally in the SQLite database.</p></section>
+<section class="panel">
+  {% if records %}
+  <div class="table-wrap"><table><thead><tr><th>Message</th><th>Prediction</th><th>Confidence</th><th>Date/time</th></tr></thead><tbody>
+  {% for row in records %}<tr><td class="message-cell">{{ row.message_text }}</td><td><span class="pill {{ 'bad' if row.prediction == 'SPAM' else 'good' }}">{{ row.prediction }}</span></td><td>{{ "%.2f"|format(row.confidence_score) }}%</td><td>{{ row.date_time }}</td></tr>{% endfor %}
+  </tbody></table></div>
+  <form method="post" action="{{ url_for('history_clear') }}" onsubmit="return confirm('Clear all saved history?')"><button class="secondary" type="submit">Clear history</button></form>
+  {% else %}<p class="empty">No messages checked yet. Try the message checker first.</p>{% endif %}
+</section>
+{% endblock %}

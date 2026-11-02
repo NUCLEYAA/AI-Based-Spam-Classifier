@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Message Checker · SpamShield{% endblock %}
+{% block content %}
+<section class="hero">
+  <span class="eyebrow">MACHINE LEARNING · NLP</span>
+  <h1>Is your message <span>safe?</span></h1>
+  <p>Paste an SMS or email message. The trained model will estimate whether it resembles spam.</p>
+</section>
+<section class="panel">
+  <form method="post">
+    <label for="message">Message to check</label>
+    <textarea id="message" name="message" maxlength="5000" placeholder="Example: Congratulations! You have won a prize. Click here..." required>{{ message }}</textarea>
+    <div class="form-bottom"><small>Do not paste passwords, OTPs or private information.</small><button type="submit">Check message →</button></div>
+  </form>
+</section>
+{% if result %}
+<section class="result {{ 'spam' if result.is_spam else 'ham' }}">
+  <div><span class="eyebrow">CLASSIFICATION RESULT</span><h2>{{ result.label }}</h2>
+  <p>Model confidence: <strong>{{ result.confidence }}%</strong></p></div>
+  <div class="score"><div class="score-inner">{{ result.confidence }}%</div></div>
+</section>
+<p class="notice">Important: this is a machine-learning estimate, not a guarantee that a message is safe. Never open suspicious links or share OTPs based only on this result.</p>
+{% endif %}
+{% endblock %}
